@@ -207,7 +207,7 @@ class ReadCplex(ReadResults):
         self, sol_file: TextIO, start_year: int, end_year: int
     ) -> Dict[str, List[List[str]]]:
         """ """
-        data = {}  # type: Dict[str, List[List[str]]]
+        data = {}  # type: Dict[str, List[List[str]]] ### 
         for linenum, line in enumerate(sol_file):
             line = line.replace("\n", "")
             try:
@@ -239,25 +239,30 @@ class ReadCplex(ReadResults):
         self, data: List[List[str]], variable: str, start_year: int, end_year: int
     ) -> pd.DataFrame:
         """Read the cplex lines into a pandas DataFrame"""
-        index = self.results_config[variable]["indices"]
-        columns = ["variable"] + index[:-1] + list(range(start_year, end_year + 1, 1))
-        df = pd.DataFrame(data=data, columns=columns)
-        df, index = check_duplicate_index(df, columns, index)
-        df = df.drop(columns="variable")
+        if variable in self.results_config.keys():                      # I inserted this simple if statement: if the variable is not in the configuration file, don't fuckng read it
+            index = self.results_config[variable]["indices"]
 
-        LOGGER.debug(
-            f"Attempting to set index for {variable} with columns {index[:-1]}"
-        )
-        try:
-            df = df.set_index(index[:-1])
-        except NotImplementedError as ex:
-            LOGGER.error(f"Error setting index for {df.head()}")
-            raise NotImplementedError(ex)
-        df = df.melt(var_name="YEAR", value_name="VALUE", ignore_index=False)
-        df = df.reset_index()
-        df = check_datatypes(df, {**self.input_config, **self.results_config}, variable)
-        df = df.set_index(index)
-        df = df[(df != 0).any(axis=1)]
+            columns = ["variable"] + index[:-1] + list(range(start_year, end_year + 1, 1))
+                
+            df = pd.DataFrame(data=data, columns=columns)
+            df, index = check_duplicate_index(df, columns, index)
+            df = df.drop(columns="variable")
+
+            LOGGER.debug(
+                f"Attempting to set index for {variable} with columns {index[:-1]}"
+            )
+            try:
+                df = df.set_index(index[:-1])
+            except NotImplementedError as ex:
+                LOGGER.error(f"Error setting index for {df.head()}")
+                raise NotImplementedError(ex)
+            df = df.melt(var_name="YEAR", value_name="VALUE", ignore_index=False)
+            df = df.reset_index()
+            df = check_datatypes(df, {**self.input_config, **self.results_config}, variable)
+            df = df.set_index(index)
+            df = df[(df != 0).any(axis=1)]
+        else:
+            df=pd.DataFrame()
         return df
 
 
