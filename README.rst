@@ -94,3 +94,8 @@ first need to install the package in *develop mode*::
 Now, all changes made in the codebase will automatically be reflected
 in the installed Python version accessible on the command line or from
 importing otoole modules into other Python packages.
+
+Changes
+===========
+- cleaning parameters which I don't need
+
