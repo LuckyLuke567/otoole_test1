@@ -1,6 +1,6 @@
 amply
 datapackage
-python_version=3.7
+python=3.7
 networkx
 openpyxl
 pandas
