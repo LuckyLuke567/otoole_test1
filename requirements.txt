@@ -7,3 +7,4 @@ pandas
 pydot
 pyyaml
 xlrd
+graphviz=2.46.1
