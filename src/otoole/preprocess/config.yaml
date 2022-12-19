@@ -115,6 +115,16 @@ InputActivityRatio:
     type: param
     dtype: float
     default: 0
+MaxRampRate:
+    indices: [REGION,TECHNOLOGY]
+    type: param
+    dtype: float
+    default: 0
+MinimumStableOperationLevel:
+    indices: [REGION,TECHNOLOGY]
+    type: param
+    dtype: float
+    default: 1
 MinStorageCharge:
     indices: [REGION,STORAGE,YEAR]
     type: param
