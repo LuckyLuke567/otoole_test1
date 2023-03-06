@@ -37,7 +37,7 @@ CapitalCost:
     indices: [REGION,TECHNOLOGY,YEAR]
     type: param
     dtype: float
-    default: 0.001
+    default: 0
 CapitalCostStorage:
     indices: [REGION,STORAGE,YEAR]
     type: param
@@ -92,6 +92,8 @@ DiscountRateStorage:
 EMISSION:
     dtype: str
     type: set
+    metadata: [Full_name,Plotting_order,Colour,Units_OS,Units,Conv_OS_U]
+    metadata_dtype: [string,double,string,string,string,double]
 EmissionActivityRatio:
     indices: [REGION,TECHNOLOGY,EMISSION,MODE_OF_OPERATION,YEAR]
     type: param
@@ -110,11 +112,18 @@ FixedCost:
 FUEL:
     dtype: str
     type: set
+    metadata: [Full_name,Plotting_order,Colour,Units_OS,Units,Conv_OS_U]
+    metadata_dtype: [string,double,string,string,string,double]
 InputActivityRatio:
     indices: [REGION,TECHNOLOGY,FUEL,MODE_OF_OPERATION,YEAR]
     type: param
     dtype: float
     default: 0
+MaxCurtailment:
+    indices: [REGION,TECHNOLOGY,YEAR]
+    type: param
+    dtype: float
+    default: 1
 MaxRampRate:
     indices: [REGION,TECHNOLOGY]
     type: param
@@ -133,6 +142,8 @@ MinStorageCharge:
 MODE_OF_OPERATION:
     dtype: int
     type: set
+    metadata: []
+    metadata_dtype: []
 ModelPeriodEmissionLimit:
     indices: [REGION,EMISSION]
     type: param
@@ -161,6 +172,8 @@ OutputActivityRatio:
 REGION:
     dtype: str
     type: set
+    metadata: []
+    metadata_dtype: []
 REMinProductionTarget:
     indices: [REGION,YEAR]
     type: param
@@ -190,7 +203,7 @@ ResidualStorageCapacity:
     indices: [REGION,STORAGE,YEAR]
     type: param
     dtype: float
-    default: 0
+    default: 999
 RETagFuel:
     indices: [REGION,FUEL,YEAR]
     type: param
@@ -217,6 +230,8 @@ SpecifiedDemandProfile:
 STORAGE:
     dtype: str
     type: set
+    metadata: [Full_name,Plotting_order,Colour,Units_OS,Units,Conv_OS_U]
+    metadata_dtype: [string,double,string,string,string,double]
 StorageLevelStart:
     indices: [REGION,STORAGE]
     type: param
@@ -226,15 +241,17 @@ StorageMaxChargeRate:
     indices: [REGION,STORAGE]
     type: param
     dtype: float
-    default: 9999999
+    default: 0
 StorageMaxDischargeRate:
     indices: [REGION,STORAGE]
     type: param
     dtype: float
-    default: 999999
+    default: 0
 TECHNOLOGY:
     dtype: str
     type: set
+    metadata: [Full_name,Plotting_order,Colour,Units_OS,Units,Conv_OS_U]
+    metadata_dtype: [string,double,string,string,string,double]
 TechnologyFromStorage:
     indices: [REGION,TECHNOLOGY,STORAGE,MODE_OF_OPERATION]
     type: param
@@ -301,6 +318,8 @@ VariableCost:
 YEAR:
     dtype: int
     type: set
+    metadata: []
+    metadata_dtype: []
 YearSplit:
     indices: [TIMESLICE,YEAR]
     type: param
