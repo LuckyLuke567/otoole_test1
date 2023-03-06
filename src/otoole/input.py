@@ -48,6 +48,7 @@ import pandas as pd
 
 from otoole.utils import read_packaged_file
 
+import os
 logger = logging.getLogger(__name__)
 
 
@@ -282,7 +283,7 @@ class ReadStrategy(Strategy):
     """
 
     def _check_index(
-        self, input_data: Dict[str, pd.DataFrame]
+        self, input_data: Dict[str, pd.DataFrame], **kwargs
     ) -> Dict[str, pd.DataFrame]:
         """Checks index and datatypes are applied to the parameter DataFrame
 
@@ -298,6 +299,13 @@ class ReadStrategy(Strategy):
         dict
             Dictionary and pandas DataFrames containing the OSeMOSYS parameters
         """
+        
+        # My additions
+        if 'config' in kwargs.keys():
+            if kwargs['config']:
+                self.input_config=kwargs['config']
+        #-----------------------------------
+            
         for name, df in input_data.items():
 
             details = self.input_config[name]

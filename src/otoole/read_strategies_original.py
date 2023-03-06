@@ -9,7 +9,7 @@ from pandas_datapackage_reader import read_datapackage
 
 from otoole.input import ReadStrategy
 from otoole.preprocess.longify_data import check_datatypes, check_set_datatype
-from otoole.utils import read_datapackage_schema_into_config, _read_file
+from otoole.utils import read_datapackage_schema_into_config
 
 logger = logging.getLogger(__name__)
 
@@ -211,20 +211,10 @@ class ReadDatafile(ReadStrategy):
     ) -> Tuple[Dict[str, pd.DataFrame], Dict[str, Any]]:
 
         config = self.input_config
-        
-        # my additions
-        if kwargs['config']:
-            filename=kwargs['config']
-            _, ending = os.path.splitext(filename)
-            with open(filename, "r") as config_file:
-                config = _read_file(config_file, ending)
-            logger.info("Reading config from {}".format(filename))
-        # ---------------------------------------------------------
-        
         default_values = self._read_default_values(config)
         amply_datafile = self.read_in_datafile(filepath, config)
         inputs = self._convert_amply_to_dataframe(amply_datafile, config)
-        inputs = self._check_index(inputs,config=config)
+        inputs = self._check_index(inputs)
         return inputs, default_values
 
     def read_in_datafile(self, path_to_datafile: str, config: Dict) -> Amply:

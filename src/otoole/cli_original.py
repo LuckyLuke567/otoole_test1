@@ -96,12 +96,6 @@ def result_matrix(args):
 
     read_strategy = None
     write_strategy = None
-    
-    # my additions
-    input_config = None
-    if args.config:
-        input_config=args.config
-    #-------------------------------------------------------------
 
     if args.from_format == "cbc":
         read_strategy = ReadCbc()
@@ -116,7 +110,7 @@ def result_matrix(args):
     if args.input_datapackage:
         input_data, _ = ReadDatapackage().read(args.input_datapackage)
     elif args.input_datafile:
-        input_data, _ = ReadDatafile().read(args.input_datafile,config=input_config) #  added input_config
+        input_data, _ = ReadDatafile().read(args.input_datafile)
     else:
         input_data = {}
 
@@ -227,13 +221,6 @@ def get_parser():
         help="Input GNUMathProg datafile required for OSeMOSYS short or fast results",
         default=None,
     )
-    # my additions
-    result_parser.add_argument(
-        "--config",
-        help="configuration file to be used in readDataFile",
-        default=None,
-    )
-    #----------------
     result_parser.set_defaults(func=result_matrix)
 
     # Parser for conversion
