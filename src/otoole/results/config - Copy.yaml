@@ -64,12 +64,6 @@ NetChargeWithinDay:
     dtype: float
     default: 0
     calculated: False
-NetChargeWithinYear:
-    indices: [REGION, STORAGE, SEASON, DAYTYPE, DAILYTIMEBRACKET, YEAR]
-    type: param
-    dtype: float
-    default: 0
-    calculated: False
 NewCapacity:
     indices: [REGION, TECHNOLOGY, YEAR]
     type: param
@@ -142,42 +136,6 @@ SalvageValueStorage:
     dtype: float
     default: 0
     calculated: False
-ShortTermStorageLevel:
-    indices: [REGION, STORAGE, SEASON, DAYTYPE, DAILYTIMEBRACKET,YEAR]
-    type: param
-    dtype: float
-    default: 0
-    calculated: False
-StorageLowerLimit:
-    indices: [REGION, STORAGE, YEAR]
-    type: param
-    dtype: float
-    default: 0
-    calculated: False
-StorageLevelYearStart:
-    indices: [REGION, STORAGE, YEAR]
-    type: param
-    dtype: float
-    default: 0
-    calculated: False
-StorageLevelSeasonStart:
-    indices: [REGION, STORAGE, SEASON, YEAR]
-    type: param
-    dtype: float
-    default: 0
-    calculated: False
-StorageLevelDayTypeStart:
-    indices: [REGION, STORAGE, SEASON, DAYTYPE, YEAR]
-    type: param
-    dtype: float
-    default: 0
-    calculated: False
-StorageLevelDayTypeFinish:
-    indices: [REGION, STORAGE, SEASON, DAYTYPE, YEAR]
-    type: param
-    dtype: float
-    default: 0
-    calculated: False
 TotalAnnualTechnologyActivityByMode:
     indices: [REGION, TECHNOLOGY, MODE_OF_OPERATION, YEAR]
     type: param
@@ -202,6 +160,12 @@ TotalTechnologyAnnualActivity:
     dtype: float
     default: 0
     calculated: True
+TotalTechnologyModelPeriodActivity:
+    indices: [REGION, TECHNOLOGY]
+    type: param
+    dtype: float
+    default: 0
+    calculated: True
 Trade:
     indices: [REGION, REGION, TIMESLICE, FUEL, YEAR]
     type: param
@@ -214,37 +178,6 @@ UseByTechnology:
     dtype: float
     default: 0
     calculated: False
-E_chp:
-    indices: [REGION, YEAR]
-    type: param
-    dtype: float
-    default: 0
-    calculated: false
-    
-Use:
-    indices: [REGION,TIMESLICE,FUEL,YEAR]
-    type: param
-    dtype: float
-    default: 0
-    calculated: false
-Production:
-    indices: [REGION,TIMESLICE,FUEL,YEAR]
-    type: param
-    dtype: float
-    default: 0
-    calculated: false
-    
-CapitalInvestmentStorage:
-    indices: [REGION,STORAGE,YEAR]
-    type: param
-    dtype: float
-    default: 0
-    calculated: false
 _REGION:
     type: set
     dtype: str
-
-
-    
-
-    
