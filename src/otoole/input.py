@@ -210,8 +210,9 @@ class WriteStrategy(Strategy):
         filepath: Optional[str] = None,
         default_values: Optional[Dict] = None,
         user_config: Optional[Dict] = None,
+        results_config: Optional[Dict] = None,
     ):
-        super().__init__(user_config=user_config)
+        super().__init__(user_config=user_config,results_config=results_config)
         if filepath:
             self.filepath = filepath
         else:

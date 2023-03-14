@@ -101,17 +101,21 @@ def result_matrix(args):
     input_config = None
     if args.config:
         input_config=args.config
+    output_config = None
+    if args.output_config:
+        output_config=read_packaged_file(args.output_config)
     #-------------------------------------------------------------
 
     if args.from_format == "cbc":
-        read_strategy = ReadCbc()
+        read_strategy = ReadCbc(results_config=output_config)
     elif args.from_format == "cplex":
-        read_strategy = ReadCplex()
+        read_strategy = ReadCplex(results_config=output_config)
     elif args.from_format == "gurobi":
-        read_strategy = ReadGurobi()
+        read_strategy = ReadGurobi(results_config=output_config)
+            
 
     if args.to_format == "csv":
-        write_strategy = WriteCsv()
+        write_strategy = WriteCsv(results_config=output_config)
 
     if args.input_datapackage:
         input_data, _ = ReadDatapackage().read(args.input_datapackage)
@@ -231,6 +235,12 @@ def get_parser():
     result_parser.add_argument(
         "--config",
         help="configuration file to be used in readDataFile",
+        default=None,
+    )
+    
+    result_parser.add_argument(
+        "--output_config",
+        help="output configuration file to be used in ?",
         default=None,
     )
     #----------------
